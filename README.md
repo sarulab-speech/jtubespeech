@@ -52,7 +52,7 @@ $ python scripts/obtain_video_id.py {lang} {filename_videoid_list}
 ### step4: downloading videos with manual subtitles
 This downloads audio and manual subtitles. Note that, this process requires a very large amount of storage.`{filename_subtitle_list}` is a subtitle list file makde in step3. The audio and subtitles will be saved in `video/wav` and `video/txt`, respectively.
 ```
-$ python scripts/obtain_video_id.py {lang} {filename_subtitle_list}
+$ python scripts/download_video.py {lang} {filename_subtitle_list}
 ```
 
 ## Reference
