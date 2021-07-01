@@ -17,10 +17,10 @@ This repository provides a list of YouTube videos with Japanese subtitles.
 - `channelid`: YouTube Channel ID. Its YouTube page is `https://www.youtube.com/channel/{channelid}`.
 
 ## Statistics
-|                   | 202103.csv  | {YYYYMM}.csv  |
-| ---               | ---         | ---           |
-| #videos-sub-true  | xxx         | (TBA)         |
-| #videos-auto-true | xxx         | (TBA)         |
+|                   | 202103.csv          | {YYYYMM}.csv  |
+| ---               | ---                 | ---           |
+| #videos-sub-true  | xxx (10,000 hours)  | (TBA)         |
+| #videos-auto-true | xxx                 | (TBA)         |
 <br>
 
 ## Contributors
