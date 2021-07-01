@@ -1,5 +1,5 @@
 # JTubeSpeech: Corpus of Japanese speech collected from YouTube 
-This repository provides a list of YouTube videos with Japanese subtitles.
+This repository provides 1) a list of YouTube videos with Japanese subtitles and 2) scripts for making new lists of new languages.
 
 ## Description
 `data/{lang}/{YYYYMM}.csv` lists as follows.
@@ -20,8 +20,8 @@ This repository provides a list of YouTube videos with Japanese subtitles.
 ## Statistics
 |                   | ja/202103.csv           | {lang}/{YYYYMM}.csv  |
 | ---               | ---                     | ---           |
-| #videos-sub-true  | xxx (10,000 hours)      | (TBA)         |
-| #videos-auto-true | xxx                     | (TBA)         |
+| #videos-sub-true  | 110,000 (10,000 hours)  | (TBA)         |
+| #videos-auto-true | 4,960,000               | (TBA)         |
 <br>
 
 ## Contributors
@@ -31,8 +31,8 @@ This repository provides a list of YouTube videos with Japanese subtitles.
 - [Sayaka Shiota](http://www-isys.sd.tmu.ac.jp/) (Tokyo Metropolitan University, Japan)
 - [Shinji Watanabe](https://sites.google.com/view/shinjiwatanabe) (Carnegie Mellon University, USA)
 
-## Scripts
-This repository provides scripts for data collection from YouTube. Since processes of the scripts are language independent, users can collect data of their favorite langauges. [youtube-dl](https://github.com/ytdl-org/youtube-dl) is required.
+## Scripts for data collection
+`scripts/*.py` are scripts for data collection from YouTube. Since processes of the scripts are language independent, users can collect data of their favorite langauges. [youtube-dl](https://github.com/ytdl-org/youtube-dl) is required.
 
 ### step1: making search words 
 This downloads the wikipedia dump file and finds words for searching videos. `{lang}` is the languag code, e.g., `ja` (Japanese) and `en` (English).
