@@ -54,6 +54,20 @@ This downloads audio and manual subtitles. Note that, this process requires a ve
 ```
 $ python scripts/download_video.py {lang} {filename_subtitle_list}
 ```
+### step5 (ASR): alignment and scoring
+Subtitles are not always correctly aligned with the audio and in some cases, subtitles not fit to the audio.
+The script `scripts/align.py` aligns subtitles and audio with CTC segmentation using an ESPnet 2 ASR model:
+```
+$ python scripts/align.py {asr_train_config} {asr_model_file} {wavdir} {txtdir} {output_dir}
+```
+The result is written into a segments file `segments.txt` and a log file `segments.log` in the output directory.
+Using the segments file, bad utterances or audio files can be sorted-out:
+```
+min_confidence_score=-0.3
+awk -v ms=${min_confidence_score} '{ if ($5 > ms) {print} }' ${output_dir}/segments.txt
+```
+
+
 
 ## Reference
 - coming soon

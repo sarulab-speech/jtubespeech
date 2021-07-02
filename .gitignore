@@ -4,3 +4,4 @@ sub/*
 videoid/*
 video/*
 README.pdf
+__pycache__/
