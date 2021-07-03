@@ -7,7 +7,7 @@ import subprocess
 from pathlib import Path
 from util import make_video_url
 import pandas as pd
-
+from tqdm import tqdm
 
 def parse_args():
   parser = argparse.ArgumentParser(
@@ -33,7 +33,7 @@ def retrieve_subtitle_exists(lang, fn_videoid, outdir="sub", wait_sec=0.2, fn_ch
 
   # load video ID list
   n_video = 0
-  for videoid in open(fn_videoid).readlines():
+  for videoid in tqdm(open(fn_videoid).readlines()):
     videoid = videoid.strip(" ").strip("\n")
     if videoid in set(subtitle_exists["videoid"]):
       continue

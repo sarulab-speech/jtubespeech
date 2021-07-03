@@ -7,7 +7,7 @@ import pydub
 from pathlib import Path
 from util import make_video_url, make_basename, vtt2txt
 import pandas as pd
-
+from tqdm import tqdm
 
 def parse_args():
   parser = argparse.ArgumentParser(
@@ -23,7 +23,7 @@ def parse_args():
 def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
   sub = pd.read_csv(fn_sub)
 
-  for videoid in sub[sub["sub"]==True]["videoid"]: # manual subtitle only
+  for videoid in tqdm(sub[sub["sub"]==True]["videoid"]): # manual subtitle only
     fn = {}
     for k in ["wav", "wav16k", "vtt", "txt"]:
       fn[k] = Path(outdir) / lang / k / (make_basename(videoid) + "." + k[:3])

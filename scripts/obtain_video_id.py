@@ -5,6 +5,7 @@ import re
 import sys
 from pathlib import Path
 from util import make_query_url
+from tqdm import tqdm
 
 
 def parse_args():
@@ -23,7 +24,7 @@ def obtain_video_id(lang, fn_word, outdir="videoid", wait_sec=0.2):
   fn_videoid.parent.mkdir(parents=True, exist_ok=True)
 
   with open(fn_videoid, "w") as f:
-    for word in list(open(fn_word, "r").readlines()):
+    for word in tqdm(list(open(fn_word, "r").readlines())):
       word = word.rstrip("\n").strip(" ").replace(" ", "+")
 
       # download search results
