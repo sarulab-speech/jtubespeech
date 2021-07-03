@@ -35,22 +35,22 @@ This repository provides 1) a list of YouTube videos with Japanese subtitles and
 `scripts/*.py` are scripts for data collection from YouTube. Since processes of the scripts are language independent, users can collect data of their favorite langauges. [youtube-dl](https://github.com/ytdl-org/youtube-dl) is required.
 
 ### step1: making search words 
-This downloads the wikipedia dump file and finds words for searching videos. `{lang}` is the languag code, e.g., `ja` (Japanese) and `en` (English).
+The script `scripts/make_search_word.py` downloads the wikipedia dump file and finds words for searching videos. `{lang}` is the languag code, e.g., `ja` (Japanese) and `en` (English).
 ```
 $ python scripts/make_search_word.py {lang}
 ```
 ### step2: obtaining video IDs
-This obtains YouTube video IDs by searching by words. `{filename_word_list}` is a word list file made in step1. After this step, the process will take a long time. It is recommended to split the files (e.g., `{filename_word_list}`) and run them in parallel.
+The script `scripts/obtain_video_id.py` obtains YouTube video IDs by searching by words. `{filename_word_list}` is a word list file made in step1. After this step, the process will take a long time. It is recommended to split the files (e.g., `{filename_word_list}`) and run them in parallel.
 ```
 $ python scripts/obtain_video_id.py {lang} {filename_word_list}
 ```
 ### step3: checking if subtitles are available
-This retrieves whether the video has subtitles or not. `{filename_videoid_list}` is a videoID list file made in step2. This process will make a CSV file.
+The script `scripts/retrieve_subtitle_exists.py` retrieves whether the video has subtitles or not. `{filename_videoid_list}` is a videoID list file made in step2. This process will make a CSV file.
 ```
-$ python scripts/obtain_video_id.py {lang} {filename_videoid_list}
+$ python scripts/retrieve_subtitle_exists.py {lang} {filename_videoid_list}
 ```
 ### step4: downloading videos with manual subtitles
-This downloads audio and manual subtitles. Note that, this process requires a very large amount of storage.`{filename_subtitle_list}` is a subtitle list file made in step3. The audio and subtitles will be saved in `video/{lang}/wav16k` and `video/{lang}/txt`, respectively.
+The script `scripts/download_video.py` downloads audio and manual subtitles. Note that, this process requires a very large amount of storage.`{filename_subtitle_list}` is a subtitle list file made in step3. The audio and subtitles will be saved in `video/{lang}/wav16k` and `video/{lang}/txt`, respectively.
 ```
 $ python scripts/download_video.py {lang} {filename_subtitle_list}
 ```
@@ -66,8 +66,11 @@ Using the segments file, bad utterances or audio files can be sorted-out:
 min_confidence_score=-0.3
 awk -v ms=${min_confidence_score} '{ if ($5 > ms) {print} }' ${output_dir}/segments.txt
 ```
-
-
+### step5 (ASV): speaker variation scoring
+There are three types of videos: text-to-speech (a.k.a., TTS) video, single-speaker (i.e., monologue) video, and multi-speaker (e.g., dialogue) video. The script `scripts/xxx.py` obtains scores of speaker variation within a video to classify videos into three types. 
+```
+$ python scripts/xxx.py
+```
 
 ## Reference
 - coming soon
