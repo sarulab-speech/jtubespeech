@@ -40,7 +40,7 @@ This downloads the wikipedia dump file and finds words for searching videos. `{l
 $ python scripts/make_search_word.py {lang}
 ```
 ### step2: obtaining video IDs
-This obtains YouTube video IDs by searching words. `{filename_word_list}` is a word list file made in step1. After this step, the process will take a long time. It is recommended to split the files (e.g., `{filename_word_list}`) and run them in parallel.
+This obtains YouTube video IDs by searching by words. `{filename_word_list}` is a word list file made in step1. After this step, the process will take a long time. It is recommended to split the files (e.g., `{filename_word_list}`) and run them in parallel.
 ```
 $ python scripts/obtain_video_id.py {lang} {filename_word_list}
 ```
@@ -50,7 +50,7 @@ This retrieves whether the video has subtitles or not. `{filename_videoid_list}`
 $ python scripts/obtain_video_id.py {lang} {filename_videoid_list}
 ```
 ### step4: downloading videos with manual subtitles
-This downloads audio and manual subtitles. Note that, this process requires a very large amount of storage.`{filename_subtitle_list}` is a subtitle list file makde in step3. The audio and subtitles will be saved in `video/wav` and `video/txt`, respectively.
+This downloads audio and manual subtitles. Note that, this process requires a very large amount of storage.`{filename_subtitle_list}` is a subtitle list file made in step3. The audio and subtitles will be saved in `video/{lang}/wav16k` and `video/{lang}/txt`, respectively.
 ```
 $ python scripts/download_video.py {lang} {filename_subtitle_list}
 ```
