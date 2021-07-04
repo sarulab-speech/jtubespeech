@@ -2,7 +2,7 @@
 This repository provides 1) a list of YouTube videos with Japanese subtitles and 2) scripts for making new lists of new languages.
 
 ## Description
-`data/{lang}/{YYYYMM}.csv` lists as follows.
+`data/{lang}/{YYYYMM}.csv` lists as follows. See step4 for download.
 |     | videoid     | auto  | sub   | channelid                 |
 |---  |---          | ---   | ---   | ---                       |
 |0    | 0017RsBbUHk | True  | True  | UCTW2tw0Mhho72MojB1L48IQ  |
@@ -10,7 +10,7 @@ This repository provides 1) a list of YouTube videos with Japanese subtitles and
 |---  |---          | ---   | ---   | ---                       |
 <br>
 
-- `lang`: Language (ja, ...)
+- `lang`: Language ID (ja [Japanese], en [English], ...)
 - `YYYYMM`: Year and month when we collect data
 - `videoid`: YouTube video ID. Its YouTube page is `https://www.youtube.com/watch?v={videoid}`.
 - `auto`: The video has an automatic subtitle or not.
@@ -32,7 +32,7 @@ This repository provides 1) a list of YouTube videos with Japanese subtitles and
 - [Shinji Watanabe](https://sites.google.com/view/shinjiwatanabe) (Carnegie Mellon University, USA)
 
 ## Scripts for data collection
-`scripts/*.py` are scripts for data collection from YouTube. Since processes of the scripts are language independent, users can collect data of their favorite langauges. [youtube-dl](https://github.com/ytdl-org/youtube-dl) is required.
+`scripts/*.py` are scripts for data collection from YouTube. Since processes of the scripts are language independent, users can collect data of their favorite langauges. [youtube-dl](https://github.com/ytdl-org/youtube-dl) and ffmpeg are required.
 
 ### step1: making search words 
 The script `scripts/make_search_word.py` downloads the wikipedia dump file and finds words for searching videos. `{lang}` is the languag code, e.g., `ja` (Japanese) and `en` (English).
@@ -45,7 +45,7 @@ The script `scripts/obtain_video_id.py` obtains YouTube video IDs by searching b
 $ python scripts/obtain_video_id.py {lang} {filename_word_list}
 ```
 ### step3: checking if subtitles are available
-The script `scripts/retrieve_subtitle_exists.py` retrieves whether the video has subtitles or not. `{filename_videoid_list}` is a videoID list file made in step2. This process will make a CSV file.
+The script `scripts/retrieve_subtitle_exists.py` retrieves whether the video has subtitles or not. `{filename_videoid_list}` is a videoID list file made in step2. This process will make a CSV file. 
 ```
 $ python scripts/retrieve_subtitle_exists.py {lang} {filename_videoid_list}
 ```
@@ -77,3 +77,4 @@ $ python scripts/xxx.py
 
 ## Link
 - [youtube-dl](https://github.com/ytdl-org/youtube-dl)
+- [Other corpora by main contributor](https://sites.google.com/site/shinnosuketakamichi/publication/corpus)

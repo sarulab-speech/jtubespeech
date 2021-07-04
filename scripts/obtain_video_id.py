@@ -19,7 +19,7 @@ def parse_args():
   return parser.parse_args(sys.argv[1:])
 
 
-def obtain_video_id(lang, fn_word, outdir="videoid", wait_sec=0.2):
+def obtain_video_id(lang, fn_word, outdir="videoid", wait_sec=0.1):
   fn_videoid = Path(outdir) / lang / f"{Path(fn_word).stem}.txt"
   fn_videoid.parent.mkdir(parents=True, exist_ok=True)
 
