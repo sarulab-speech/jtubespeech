@@ -38,7 +38,7 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
       cp = subprocess.run(f"youtube-dl --sub-lang {lang} --extract-audio --audio-format wav --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
       if cp.returncode != 0:
         print(f"Failed to download the video: url = {url}")
-      continue
+        continue
       shutil.move(f"{base}.{lang}.vtt", fn["vtt"])
 
       # vtt -> txt (reformatting)
