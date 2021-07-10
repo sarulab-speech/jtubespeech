@@ -39,7 +39,11 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
       if cp.returncode != 0:
         print(f"Failed to download the video: url = {url}")
         continue
-      shutil.move(f"{base}.{lang}.vtt", fn["vtt"])
+      try:
+        shutil.move(f"{base}.{lang}.vtt", fn["vtt"])
+      except Exception as e:
+        print(f"Failed to rename subtitle file. The download may have failed: url = {url}, filename = {base}.{lang}.vtt, error = {e}")
+        continue
 
       # vtt -> txt (reformatting)
       txt = vtt2txt(open(fn["vtt"], "r").readlines())
