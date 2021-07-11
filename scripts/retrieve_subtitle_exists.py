@@ -60,7 +60,7 @@ def retrieve_subtitle_exists(lang, fn_videoid, outdir="sub", wait_sec=0.2, fn_ch
       pass
 
     # write current result
-    if n_video % 2 == 0:
+    if n_video % 100 == 0:
       subtitle_exists.to_csv(fn_sub, index=None)
     
     # sleep

@@ -19,7 +19,7 @@ def parse_args():
   return parser.parse_args(sys.argv[1:])
 
 
-def obtain_video_id(lang, fn_word, outdir="videoid", wait_sec=0.1):
+def obtain_video_id(lang, fn_word, outdir="videoid", wait_sec=0.2):
   fn_videoid = Path(outdir) / lang / f"{Path(fn_word).stem}.txt"
   fn_videoid.parent.mkdir(parents=True, exist_ok=True)
 
@@ -27,12 +27,12 @@ def obtain_video_id(lang, fn_word, outdir="videoid", wait_sec=0.1):
     for word in tqdm(list(open(fn_word, "r").readlines())):
       word = word.rstrip("\n").strip(" ").replace(" ", "+")
 
-      # download search results
-      url = make_query_url(word)
-      html = requests.get(url).content
-
-      # find video IDs
       try:
+        # download search results
+        url = make_query_url(word)
+        html = requests.get(url).content
+
+        # find video IDs
         videoids_found = [x.split(":")[1].strip("\"").strip(" ") for x in re.findall(r"\"videoId\":\"[\w\_\-]+?\"", str(html))]
         videoids_found = list(set(videoids_found))
 
