@@ -46,9 +46,13 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
         continue
 
       # vtt -> txt (reformatting)
-      txt = vtt2txt(open(fn["vtt"], "r").readlines())
-      with open(fn["txt"], "w") as f:
-        f.writelines([f"{t[0]:1.3f}\t{t[1]:1.3f}\t\"{t[2]}\"\n" for t in txt])
+      try:
+        txt = vtt2txt(open(fn["vtt"], "r").readlines())
+        with open(fn["txt"], "w") as f:
+          f.writelines([f"{t[0]:1.3f}\t{t[1]:1.3f}\t\"{t[2]}\"\n" for t in txt])
+      except Exception as e:
+        print(f"Falied to convert subtitle file to txt file: url = {url}, filename = {fn['vtt']}, error = {e}")
+        continue
 
       # wav -> wav16k (resampling to 16kHz, 1ch)
       wav = pydub.AudioSegment.from_file(fn["wav"], format = "wav")
