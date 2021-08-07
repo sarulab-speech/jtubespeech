@@ -65,7 +65,7 @@ This repository provides 1) a list of YouTube videos with Japanese subtitles (JT
 `scripts/*.py` are scripts for data collection from YouTube. Since processes of the scripts are language independent, users can collect data of their favorite langauges. [youtube-dl](https://github.com/ytdl-org/youtube-dl) and ffmpeg are required.
 
 ### step1: making search words 
-The script `scripts/make_search_word.py` downloads the wikipedia dump file and finds words for searching videos. `{lang}` is the languag code, e.g., `ja` (Japanese) and `en` (English).
+The script `scripts/make_search_word.py` downloads the wikipedia dump file and finds words for searching videos. `{lang}` is the language code, e.g., `ja` (Japanese) and `en` (English).
 ```
 $ python scripts/make_search_word.py {lang}
 ```
