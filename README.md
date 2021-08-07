@@ -1,5 +1,5 @@
 # JTubeSpeech: Corpus of Japanese speech collected from YouTube 
-This repository provides 1) a list of YouTube videos with Japanese subtitles and 2) scripts for making new lists of new languages.
+This repository provides 1) a list of YouTube videos with Japanese subtitles (JTubeSpeech), 2) scripts for making new lists of new languages, and 3) tiny lists for other langauges.
 
 ## Description
 `data/{lang}/{YYYYMM}.csv` lists as follows. See step4 for download.
@@ -18,10 +18,40 @@ This repository provides 1) a list of YouTube videos with Japanese subtitles and
 - `channelid`: YouTube Channel ID. Its YouTube page is `https://www.youtube.com/channel/{channelid}`.
 
 ## Statistics
-|                   | ja/202103.csv           | {lang}/{YYYYMM}.csv  |
-| ---               | ---                     | ---           |
-| #videos-sub-true  | 110,000 (10,000 hours)  | (TBA)         |
-| #videos-auto-true | 4,960,000               | (TBA)         |
+| lang | filename (data/) | #videos-sub-true | #videos-auto-true |
+| ---  | ---              | ---           | ---           |
+| **ja** | ja/202103.csv  | **110,000** (10,000 hours) | **4,960,000** |
+| en | en/202108_tiny.csv | 74,227 | 65,570 |
+| zh | zh/202108_tiny.csv | 63,126 | 23,387 |
+| th | th/202108_tiny.csv | 40,886 | 26,907 |
+| ru | ru/202108_tiny.csv | 39,890 | 46,061 |
+| hi | hi/202108_tiny.csv | 34,034 | 31,439 |
+| ar | ar/202108_tiny.csv | 31,993 | 42,649 |
+| de | de/202108_tiny.csv | 30,727 | 66,954 |
+| tr | tr/202108_tiny.csv | 27,317 | 68,079 |
+| el | el/202108_tiny.csv | 25,947 | 26,735 |
+| fr | fr/202108_tiny.csv | 25,371 | 70,466 |
+| ta | ta/202108_tiny.csv | 21,860 | 26,120 |
+| da | da/202108_tiny.csv | 18,779 | 62,094 |
+| id | id/202108_tiny.csv | 18,086 | 72,760 |
+| bn | bn/202108_tiny.csv | 16,315 | 57,112 |
+| fi | fi/202108_tiny.csv | 15,561 | 50,626 |
+| my | my/202108_tiny.csv | 14,729 | 95,755 |
+| hu | hu/202108_tiny.csv | 13,154 | 49,237 |
+| te | te/202108_tiny.csv | 11,929 | 24,444 |
+| pt | pt/202108_tiny.csv | 11,692 | 48,974 |
+| az | az/202108_tiny.csv | 11,188 | 52,025 |
+| ur | ur/202108_tiny.csv | 10,917 | 26,503 |
+| is | is/202108_tiny.csv | 10,632 | 38,268 |
+| fa | fa/202108_tiny.csv | 10,482 | 24,102 |
+| ka | ka/202108_tiny.csv | 10,395 | 23,914 |
+| uk | uk/202108_tiny.csv | 9,103 | 36,392 |
+| ml | ml/202108_tiny.csv | 9,080 | 42,359 |
+| ga | ga/202108_tiny.csv | 9,058 | 51,411 |
+| be | be/202108_tiny.csv | 7,622 | 37,739 |
+| ky | ky/202108_tiny.csv | 7,241 | 42,027 |
+| kk | kk/202108_tiny.csv | 6,917 | 26,163 |
+| tg | tg/202108_tiny.csv | 5,491 | 40,244 |
 <br>
 
 ## Contributors

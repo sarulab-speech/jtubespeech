@@ -5,7 +5,7 @@ import re
 import sys
 import subprocess
 from pathlib import Path
-from util import make_video_url
+from util import make_video_url, get_subtitle_language
 import pandas as pd
 from tqdm import tqdm
 
@@ -43,18 +43,10 @@ def retrieve_subtitle_exists(lang, fn_videoid, outdir="sub", wait_sec=0.2, fn_ch
     try:
       result = subprocess.check_output(f"youtube-dl --list-subs --sub-lang {lang} --skip-download {url}", \
         shell=True, universal_newlines=True)
-
-      se = {"videoid": [videoid], "auto": [False], "sub": [False]}
-      sub_type = None
-      for r in result.split("\n"):
-        if r == f"Available automatic captions for {videoid}:":
-          sub_type = "auto"
-        elif r == f"Available subtitles for {videoid}:":
-          sub_type = "sub"
-        if r.startswith(lang) and sub_type is not None:
-          se[sub_type] = [True]
-      subtitle_exists = pd.concat([subtitle_exists, pd.DataFrame(se)])
-
+      auto_lang, manu_lang = get_subtitle_language(result)
+      subtitle_exists = subtitle_exists.append( \
+        {"videoid": videoid, "auto": lang in auto_lang, "sub": lang in manu_lang}, 
+        ignore_index=True)
       n_video += 1
     except:
       pass
