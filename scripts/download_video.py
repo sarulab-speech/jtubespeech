@@ -58,7 +58,7 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
       try:
         wav = pydub.AudioSegment.from_file(fn["wav"], format = "wav")
         wav = pydub.effects.normalize(wav, 5.0).set_frame_rate(16000).set_channels(1)
-        wav.export(fn["wav16k"], format="wav", bitrate='16k')
+        wav.export(fn["wav16k"], format="wav", bitrate="16k")
       except Exception as e:
         print(f"Failed to normalize or resample downloaded audio: url = {url}, filename = {fn['wav']}, error = {e}")
         continue
