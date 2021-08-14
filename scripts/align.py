@@ -226,7 +226,7 @@ def align(
     longest_audio_segments:
         Size of maximum length for partitions. If an audio file
         is longer, it gets split into parts that are 75% of this value.
-        The 75% was chosen to prevent emtpy partitions.
+        The 75% was chosen to prevent empty partitions.
         This value is chosen based on the observation that Transformer-based
         models crash on audio parts longer than ~400-500 s on a computer
         with 64GB RAM
@@ -378,7 +378,7 @@ def align(
             # align (done by worker)
             task_queue.put(task)
         except KeyboardInterrupt:
-            print(" -- Recieved keyboard interrupt. Stopping.")
+            print(" -- Received keyboard interrupt. Stopping.")
             break
         except Exception as e:
             # RuntimeError: unknown CUDA value error (at inference)
