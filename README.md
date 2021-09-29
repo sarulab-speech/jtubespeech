@@ -21,8 +21,10 @@ This repository provides 1) a list of YouTube videos with Japanese subtitles (JT
 | lang | filename (data/) | #videos-sub-true | #videos-auto-true |
 | ---  | ---              | ---           | ---           |
 | **ja** | ja/202103.csv  | **110,000** (10,000 hours) | **4,960,000** |
-| en | en/202108_tiny.csv | 74,227 | 65,570 |
-| zh | zh/202108_tiny.csv | 63,126 | 23,387 |
+| en | en/202108_middle.csv | 739,543 | 667,555 |
+|    | en/202108_tiny.csv | 74,227 | 65,570 |
+| zh | zh/202108_middle.csv | 126,271 | 23,387 |
+|    | zh/202108_tiny.csv | 63,126 | 23,387 |
 | th | th/202108_tiny.csv | 40,886 | 26,907 |
 | ru | ru/202108_tiny.csv | 39,890 | 46,061 |
 | hi | hi/202108_tiny.csv | 34,034 | 31,439 |
