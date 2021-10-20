@@ -7,10 +7,12 @@ import subprocess
 def make_video_url(videoid: str) -> str:
   return f"https://www.youtube.com/watch?v={videoid}"
 
+
 # YouTube Search URL
 def make_query_url(query: str) -> str:
   q = query.rstrip("\n").strip(" ").replace(" ", "+")
   return f"https://www.youtube.com/results?search_query={q}&sp=EgQQASgB"
+
 
 # Wikipedia dump file URL
 def make_dump_url(lang: str) -> str:
@@ -54,7 +56,7 @@ def vtt2txt(vtt: list) -> list:
       txt.append([st, et, ""])
       is_started = True   
     elif is_started:
-      v = v.replace("\n", " ").strip(" ").lstrip("-").replace("　", " ").replace("  ", " ").strip(" ").strip("\t")
+      v = _normalize_text(v)
       if len(v) == 0:
         is_started = False
       else:
@@ -63,7 +65,47 @@ def vtt2txt(vtt: list) -> list:
   # refine
   txt_refined = []
   for t in txt:
-    x = t[2].replace("\n", " ").replace("　", " ").replace("  ", " ").strip(" ").strip("\t").replace("»", "").replace("«", "")
+    x = _normalize_text(t[2])
+    if len(x) > 0:
+      txt_refined.append([t[0], t[1], x])
+
+  return txt_refined
+
+
+def _normalize_text(txt: str) -> str:
+  return txt.replace("\n", " ").replace("　", " ").replace("  ", " ").strip(" ").strip("\t").replace("»", "").replace("«", "")
+
+
+def autovtt2txt(vtt: list) -> list:
+  txt = []
+
+  for idx, v in enumerate(vtt):
+    m = re.match(r'(\d+\:\d+\:\d+\.\d+) --> (\d+\:\d+\:\d+\.\d+) align:.+', v.strip("\n"))
+    if m is None:
+      continue
+
+    st = count_total_second(dt.strptime(m.groups()[0], "%H:%M:%S.%f"))
+    et = count_total_second(dt.strptime(m.groups()[1], "%H:%M:%S.%f"))
+
+    text_line = ""
+    for line in [vtt[idx+1], vtt[idx+2]]:
+      line = _normalize_text(line)
+      if len(line) == 0 or "<" not in line:
+        continue
+      
+      head = line.split("<")[0]
+      body = re.sub(f"^{head}", "", line)
+      m = re.findall(r"<\d+\:\d+\:\d+\.\d+><c>(.+?)</c>", body)
+      if len(m) != 0:
+        text_line += head + "".join(m)
+
+    if len(text_line) > 0:
+      txt.append([st, et, text_line])
+
+  # refine
+  txt_refined = []
+  for t in txt:
+    x = _normalize_text(t[2])
     if len(x) > 0:
       txt_refined.append([t[0], t[1], x])
 

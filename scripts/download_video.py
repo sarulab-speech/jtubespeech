@@ -5,7 +5,7 @@ import subprocess
 import shutil
 import pydub
 from pathlib import Path
-from util import make_video_url, make_basename, vtt2txt
+from util import make_video_url, make_basename, vtt2txt, autovtt2txt
 import pandas as pd
 from tqdm import tqdm
 
@@ -21,6 +21,14 @@ def parse_args():
   return parser.parse_args(sys.argv[1:])
 
 def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
+  """
+  Tips:
+    If you want to download automatic subtitles instead of manual subtitles, please change as follows.
+      1. replace "--write-sub" option of youtube-dl with "--write-auto-sub"
+      2. replace vtt2txt() with autovtt2txt()
+      3 (optional). change fn["vtt"] (path to save subtitle) to another. 
+  """
+
   sub = pd.read_csv(fn_sub)
 
   for videoid in tqdm(sub[sub["sub"]==True]["videoid"]): # manual subtitle only
