@@ -24,9 +24,10 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
   """
   Tips:
     If you want to download automatic subtitles instead of manual subtitles, please change as follows.
-      1. replace "--write-sub" option of youtube-dl with "--write-auto-sub"
-      2. replace vtt2txt() with autovtt2txt()
-      3 (optional). change fn["vtt"] (path to save subtitle) to another. 
+      1. replace "sub[sub["sub"]==True]" of for-loop with "sub[sub["auto"]==True]"
+      2. replace "--write-sub" option of youtube-dl with "--write-auto-sub"
+      3. replace vtt2txt() with autovtt2txt()
+      4 (optional). change fn["vtt"] (path to save subtitle) to another. 
   """
 
   sub = pd.read_csv(fn_sub)
