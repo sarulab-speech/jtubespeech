@@ -86,7 +86,7 @@ def download_videos(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
 
   with Pool() as pool:
     result = set()
-    pbar = tqdm(len(sub[sub["sub"]==True]))
+    pbar = tqdm(total=len(sub[sub["sub"]==True]))
     for videoid in sub[sub["sub"]==True]["videoid"]: # manual subtitle only
       r = pool.apply_async(download_video, (lang, videoid, outdir, wait_sec, keep_org), error_callback=error_callback)
       result.add(r)
