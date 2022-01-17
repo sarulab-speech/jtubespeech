@@ -21,39 +21,66 @@ This repository provides 1) a list of YouTube videos with Japanese subtitles (JT
 | lang | filename (data/) | #videos-sub-true | #videos-auto-true |
 | ---  | ---              | ---           | ---           |
 | **ja** | ja/202103.csv  | **110,000** (10,000 hours) | **4,960,000** |
-| en | en/202108_middle.csv | 739,543 | 667,555 |
-|    | en/202108_tiny.csv | 74,227 | 65,570 |
-| zh | zh/202108_middle.csv | 126,271 | 23,387 |
-|    | zh/202108_tiny.csv | 63,126 | 23,387 |
-| th | th/202108_tiny.csv | 40,886 | 26,907 |
-| ru | ru/202108_tiny.csv | 39,890 | 46,061 |
-| hi | hi/202108_tiny.csv | 34,034 | 31,439 |
-| ar | ar/202108_tiny.csv | 31,993 | 42,649 |
-| de | de/202108_tiny.csv | 30,727 | 66,954 |
-| tr | tr/202108_tiny.csv | 27,317 | 68,079 |
-| el | el/202108_tiny.csv | 25,947 | 26,735 |
-| fr | fr/202108_tiny.csv | 25,371 | 70,466 |
-| ta | ta/202108_tiny.csv | 21,860 | 26,120 |
-| da | da/202108_tiny.csv | 18,779 | 62,094 |
-| id | id/202108_tiny.csv | 18,086 | 72,760 |
-| bn | bn/202108_tiny.csv | 16,315 | 57,112 |
-| fi | fi/202108_tiny.csv | 15,561 | 50,626 |
-| my | my/202108_tiny.csv | 14,729 | 95,755 |
-| hu | hu/202108_tiny.csv | 13,154 | 49,237 |
-| te | te/202108_tiny.csv | 11,929 | 24,444 |
-| pt | pt/202108_tiny.csv | 11,692 | 48,974 |
-| az | az/202108_tiny.csv | 11,188 | 52,025 |
-| ur | ur/202108_tiny.csv | 10,917 | 26,503 |
-| is | is/202108_tiny.csv | 10,632 | 38,268 |
-| fa | fa/202108_tiny.csv | 10,482 | 24,102 |
-| ka | ka/202108_tiny.csv | 10,395 | 23,914 |
-| uk | uk/202108_tiny.csv | 9,103 | 36,392 |
-| ml | ml/202108_tiny.csv | 9,080 | 42,359 |
-| ga | ga/202108_tiny.csv | 9,058 | 51,411 |
-| be | be/202108_tiny.csv | 7,622 | 37,739 |
-| ky | ky/202108_tiny.csv | 7,241 | 42,027 |
-| kk | kk/202108_tiny.csv | 6,917 | 26,163 |
-| tg | tg/202108_tiny.csv | 5,491 | 40,244 |
+| en | en/202108_middle.csv | 739543 | 667555 |
+|    | en/202108_tiny.csv |  74227 |  65570 |
+| ru | ru/202203_middle.csv | 258222 | 349388 |
+|    | ru/202108_tiny.csv |  39890 |  46061 |
+| de | de/202203_middle.csv | 194468 | 527993 |
+|    | de/202108_tiny.csv |  30727 |  66954 |
+| fr | fr/202203_middle.csv | 164261 | 524261 |
+|    | fr/202108_tiny.csv |  25371 |  70466 |
+| ar | ar/202203_middle.csv | 158568 | 311697 |
+|    | ar/202108_tiny.csv |  31993 |  42649 |
+| th | th/202203_middle.csv | 154416 | 250417 |
+|    | th/202108_tiny.csv |  40886 |  26907 |
+| tr | tr/202203_middle.csv | 154213 | 494187 |
+|    | tr/202108_tiny.csv |  27317 |  68079 |
+| hi | hi/202203_middle.csv | 132175 | 172565 |
+|    | hi/202108_tiny.csv |  34034 |  31439 |
+| zh | zh/202108_middle.csv | 126271 | 23387 |
+|    | zh/202108_tiny.csv |  63126 |  23387 |
+| id | id/202203_middle.csv | 105334 | 447836 |
+|    | id/202108_tiny.csv |  18086 |  72760 |
+| el | el/202203_middle.csv | 96436 | 156445 |
+|    | el/202108_tiny.csv |  25947 |  26735 |
+| pt | pt/202203_middle.csv | 90600 | 436425 |
+|    | pt/202108_tiny.csv |  11692 |  48974 |
+| da | da/202203_middle.csv | 86027 | 421190 |
+|    | da/202108_tiny.csv |  18779 |  62094 |
+| bn | bn/202203_middle.csv | 75371 | 303335 |
+|    | bn/202108_tiny.csv |  16315 |  57112 |
+| fi | fi/202203_middle.csv | 68571 | 347307 |
+|    | fi/202108_tiny.csv |  15561 |  50626 |
+| ta | ta/202203_middle.csv | 66923 | 89209 |
+|    | ta/202108_tiny.csv |  21860 |  26120 |
+| hu | hu/202203_middle.csv | 64792 | 351426 |
+|    | hu/202108_tiny.csv |  13154 |  49237 |
+| uk | uk/202203_middle.csv | 55098 | 283741 |
+|    | uk/202108_tiny.csv |  9103 |  36392 |
+| fa | fa/202203_middle.csv | 54165 | 203794 |
+|    | fa/202108_tiny.csv |  10482 |  24102 |
+| ur | ur/202203_middle.csv | 47426 | 177232 |
+|    | ur/202108_tiny.csv |  10917 |  26503 |
+| az | az/202203_middle.csv | 42906 | 272895 |
+|    | az/202108_tiny.csv |  11188 |  52025 |
+| te | te/202203_middle.csv | 41478 | 110521 |
+|    | te/202108_tiny.csv |  11929 |  24444 |
+| ka | ka/202203_middle.csv | 38199 | 158179 |
+|    | ka/202108_tiny.csv |  10395 |  23914 |
+| ml | ml/202203_middle.csv | 35477 | 249624 |
+|    | ml/202108_tiny.csv |  9080 |  42359 |
+| be | be/202203_middle.csv | 33935 | 227854 |
+|    | be/202108_tiny.csv |  7622 |  37739 |
+| is | is/202203_middle.csv | 32272 | 159506 |
+|    | is/202108_tiny.csv |  10632 |  38268 |
+| kk | kk/202203_middle.csv | 26021 | 148230 |
+|    | kk/202108_tiny.csv |  6917 |  26163 |
+| ga | ga/202203_middle.csv | 22177 | 131863 |
+|    | ga/202108_tiny.csv |  9058 |  51411 |
+| ky | ky/202203_middle.csv | 20583 | 150884 |
+|    | ky/202108_tiny.csv |  7241 |  42027 |
+| tg | tg/202203_middle.csv | 15451 | 135276 |
+|    | tg/202108_tiny.csv |  5491 |  40244 |
 <br>
 
 ## Contributors
@@ -110,3 +137,7 @@ $ python scripts/xxx.py
 ## Link
 - [youtube-dl](https://github.com/ytdl-org/youtube-dl)
 - [Other corpora by main contributor](https://sites.google.com/site/shinnosuketakamichi/publication/corpus)
+
+## Update
+- Aug. 2021: first update (`{lang}/*_tiny.csv`)
+- Jan. 2022: add mid-size data (`{lang}/*_middile.csv`)
