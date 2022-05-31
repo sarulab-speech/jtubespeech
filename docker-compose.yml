@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  jtubespeech-dl:
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile.gpu
+    container_name: jtubespeech-dl
+    image: jtubespeech-dlimage
+    shm_size: '24gb'
+    tty: true
+    volumes: 
+      - /data/audio/jtubespeech:/data
+      - $PWD:/workspace
+    command: '/bin/bash'
+    ports:
+      - 18051-18060:18051-18060
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
