@@ -20,15 +20,7 @@ RUN python --version
 RUN pyenv rehash
 RUN pip install --upgrade pip
 
-COPY requirements.txt .
+COPY ./.docker/requirements.txt .
 RUN pip install -r requirements.txt
-
-RUN pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
-
-
-# JupyterNotebookのパスワード
-RUN mkdir $HOME/.jupyter
-COPY .docker/jupyter_notebook_config.py $HOME/.jupyter/
-ENV PASSWORD password
 
 WORKDIR /workspace

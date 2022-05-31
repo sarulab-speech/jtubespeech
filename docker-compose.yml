@@ -4,13 +4,13 @@ services:
   jtubespeech-dl:
     build:
       context: .
-      dockerfile: ./.docker/Dockerfile.gpu
+      dockerfile: ./.docker/Dockerfile
     container_name: jtubespeech-dl
     image: jtubespeech-dlimage
     shm_size: '24gb'
     tty: true
     volumes: 
-      - /data/audio/jtubespeech:/data
+      - /data/audio/jtubespeech:/audio
       - $PWD:/workspace
     command: '/bin/bash'
     ports:
