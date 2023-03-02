@@ -85,6 +85,6 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
 if __name__ == "__main__":
   args = parse_args()
 
-  dirname = download_video(args.lang, args.sublist, args.outdir)
+  dirname = download_video(args.lang, args.sublist, args.outdir, keep_org=args.keeporg)
   print(f"save {args.lang.upper()} videos to {dirname}.")
 
