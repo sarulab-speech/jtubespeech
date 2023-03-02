@@ -25,7 +25,7 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
   Tips:
     If you want to download automatic subtitles instead of manual subtitles, please change as follows.
       1. replace "sub[sub["sub"]==True]" of for-loop with "sub[sub["auto"]==True]"
-      2. replace "--write-sub" option of youtube-dl with "--write-auto-sub"
+      2. replace "--write-sub" option of yt-dlp with "--write-auto-sub"
       3. replace vtt2txt() with autovtt2txt()
       4 (optional). change fn["vtt"] (path to save subtitle) to another. 
   """
@@ -44,7 +44,7 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
       # download
       url = make_video_url(videoid)
       base = fn["wav"].parent.joinpath(fn["wav"].stem)
-      cp = subprocess.run(f"youtube-dl --sub-lang {lang} --extract-audio --audio-format wav --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
+      cp = subprocess.run(f"yt-dlp --sub-lang {lang} --extract-audio --audio-format wav --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
       if cp.returncode != 0:
         print(f"Failed to download the video: url = {url}")
         continue
