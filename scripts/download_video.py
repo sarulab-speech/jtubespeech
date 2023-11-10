@@ -18,9 +18,11 @@ def parse_args():
   parser.add_argument("sublist",      type=str, help="filename of list of video IDs with subtitles")
   parser.add_argument("--outdir",     type=str, default="video", help="dirname to save videos")
   parser.add_argument("--keeporg",    action='store_true', default=False, help="keep original audio file.")
+  parser.add_argument("--wait",       type=float, default=0.5, help="seconds to wait between videos (default: 0.5)")
+  parser.add_argument("--subtitles-only", action='store_true', default=False, help="download subtitles, no audio")
   return parser.parse_args(sys.argv[1:])
 
-def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
+def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False, subs_only=False):
   """
   Tips:
     If you want to download automatic subtitles instead of manual subtitles, please change as follows.
@@ -34,17 +36,26 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
 
   for videoid in tqdm(sub[sub["sub"]==True]["videoid"]): # manual subtitle only
     fn = {}
-    for k in ["wav", "wav16k", "vtt", "txt"]:
+    for k in (["vtt", "txt"] if subs_only else ["wav", "wav16k", "vtt", "txt"]):
       fn[k] = Path(outdir) / lang / k / (make_basename(videoid) + "." + k[:3])
       fn[k].parent.mkdir(parents=True, exist_ok=True)
 
-    if not fn["wav16k"].exists() or not fn["txt"].exists():
+    exists = (subs_only or fn["wav16k"].exists()) and fn["txt"].exists()
+    if not exists:
       print(videoid)
 
       # download
       url = make_video_url(videoid)
-      base = fn["wav"].parent.joinpath(fn["wav"].stem)
-      cp = subprocess.run(f"youtube-dl --sub-lang {lang} --extract-audio --audio-format wav --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
+      if subs_only:
+        base = fn["wav"].parent.joinpath(fn["wav"].stem)
+        cp = subprocess.run(
+          f"youtube-dl --sub-lang {lang} --extract-audio --audio-format wav "
+          f"--write-sub {url} -o {base}.\%\(ext\)s",
+          shell=True, universal_newlines=True
+          )
+      else:
+        base = fn["txt"].parent.joinpath(fn["txt"].stem)
+        cp = subprocess.run(f"youtube-dl --sub-lang {lang} --skip-download --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
       if cp.returncode != 0:
         print(f"Failed to download the video: url = {url}")
         continue
@@ -63,18 +74,20 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
         print(f"Falied to convert subtitle file to txt file: url = {url}, filename = {fn['vtt']}, error = {e}")
         continue
 
-      # wav -> wav16k (resampling to 16kHz, 1ch)
-      try:
-        wav = pydub.AudioSegment.from_file(fn["wav"], format = "wav")
-        wav = pydub.effects.normalize(wav, 5.0).set_frame_rate(16000).set_channels(1)
-        wav.export(fn["wav16k"], format="wav", bitrate="16k")
-      except Exception as e:
-        print(f"Failed to normalize or resample downloaded audio: url = {url}, filename = {fn['wav']}, error = {e}")
-        continue
 
-      # remove original wav
-      if not keep_org:
-        fn["wav"].unlink()
+      if not subs_only:
+        # wav -> wav16k (resampling to 16kHz, 1ch)
+        try:
+          wav = pydub.AudioSegment.from_file(fn["wav"], format = "wav")
+          wav = pydub.effects.normalize(wav, 5.0).set_frame_rate(16000).set_channels(1)
+          wav.export(fn["wav16k"], format="wav", bitrate="16k")
+        except Exception as e:
+          print(f"Failed to normalize or resample downloaded audio: url = {url}, filename = {fn['wav']}, error = {e}")
+          continue
+
+        # remove original wav
+        if not keep_org:
+          fn["wav"].unlink()
 
       # wait
       if wait_sec > 0.01:
@@ -85,6 +98,9 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
 if __name__ == "__main__":
   args = parse_args()
 
-  dirname = download_video(args.lang, args.sublist, args.outdir)
+  dirname = download_video(
+    args.lang, args.sublist, args.outdir,
+    keep_org=args.keeporg, wait_sec=args.wait, subs_only=args.subtitles_only
+    )
   print(f"save {args.lang.upper()} videos to {dirname}.")
 
