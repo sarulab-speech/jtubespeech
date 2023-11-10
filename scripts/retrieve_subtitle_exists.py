@@ -41,7 +41,7 @@ def retrieve_subtitle_exists(lang, fn_videoid, outdir="sub", wait_sec=0.2, fn_ch
     # send query to YouTube
     url = make_video_url(videoid)
     try:
-      result = subprocess.check_output(f"youtube-dl --list-subs --sub-lang {lang} --skip-download {url}", \
+      result = subprocess.check_output(f"yt-dlp --list-subs --sub-lang {lang} --skip-download {url}", \
         shell=True, universal_newlines=True)
       auto_lang, manu_lang = get_subtitle_language(result)
       subtitle_exists = subtitle_exists.append( \
