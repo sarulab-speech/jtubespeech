@@ -15,7 +15,7 @@ def parse_args():
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
   )
   parser.add_argument("lang",         type=str, help="language code (ja, en, ...)")
-  parser.add_argument("sublist",      type=str, help="filename of list of video IDs with subtitles")  
+  parser.add_argument("sublist",      type=str, help="filename of list of video IDs with subtitles")
   parser.add_argument("--outdir",     type=str, default="video", help="dirname to save videos")
   parser.add_argument("--keeporg",    action='store_true', default=False, help="keep original audio file.")
   return parser.parse_args(sys.argv[1:])
@@ -27,7 +27,7 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False):
       1. replace "sub[sub["sub"]==True]" of for-loop with "sub[sub["auto"]==True]"
       2. replace "--write-sub" option of youtube-dl with "--write-auto-sub"
       3. replace vtt2txt() with autovtt2txt()
-      4 (optional). change fn["vtt"] (path to save subtitle) to another. 
+      4 (optional). change fn["vtt"] (path to save subtitle) to another.
   """
 
   sub = pd.read_csv(fn_sub)
