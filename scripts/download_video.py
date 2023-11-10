@@ -47,15 +47,11 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False, su
       # download
       url = make_video_url(videoid)
       if subs_only:
-        base = fn["wav"].parent.joinpath(fn["wav"].stem)
-        cp = subprocess.run(
-          f"youtube-dl --sub-lang {lang} --extract-audio --audio-format wav "
-          f"--write-sub {url} -o {base}.\%\(ext\)s",
-          shell=True, universal_newlines=True
-          )
-      else:
         base = fn["txt"].parent.joinpath(fn["txt"].stem)
         cp = subprocess.run(f"youtube-dl --sub-lang {lang} --skip-download --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
+      else:
+        base = fn["wav"].parent.joinpath(fn["wav"].stem)
+        cp = subprocess.run(f"youtube-dl --sub-lang {lang} --extract-audio --audio-format wav --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
       if cp.returncode != 0:
         print(f"Failed to download the video: url = {url}")
         continue
