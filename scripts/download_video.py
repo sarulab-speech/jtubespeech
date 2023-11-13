@@ -27,7 +27,7 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False, su
   Tips:
     If you want to download automatic subtitles instead of manual subtitles, please change as follows.
       1. replace "sub[sub["sub"]==True]" of for-loop with "sub[sub["auto"]==True]"
-      2. replace "--write-sub" option of youtube-dl with "--write-auto-sub"
+      2. replace "--write-sub" option of yt-dlp with "--write-auto-sub"
       3. replace vtt2txt() with autovtt2txt()
       4 (optional). change fn["vtt"] (path to save subtitle) to another.
   """
@@ -45,6 +45,7 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False, su
       print(videoid)
 
       # download
+      # TODO: Use "yt-dlp" like the current version, is it worth it?
       url = make_video_url(videoid)
       if subs_only:
         base = fn["txt"].parent.joinpath(fn["txt"].stem)
