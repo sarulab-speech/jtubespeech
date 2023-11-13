@@ -15,13 +15,14 @@ def parse_args():
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
   )
   parser.add_argument("lang",         type=str, help="language code (ja, en, ...)")
-  parser.add_argument("videoidlist",  type=str, help="filename of video ID list")  
+  parser.add_argument("videoidlist",  type=str, help="filename of video ID list")
   parser.add_argument("--outdir",     type=str, default="sub", help="dirname to save results")
   parser.add_argument("--checkpoint", type=str, default=None, help="filename of list checkpoint (for restart retrieving)")
+  parser.add_argument("--wait",       type=float, default=0.0, help="seconds to wait between videos (default: 0.0)")
   return parser.parse_args(sys.argv[1:])
 
 
-def retrieve_subtitle_exists(lang, fn_videoid, outdir="sub", wait_sec=0.2, fn_checkpoint=None):
+def retrieve_subtitle_exists(lang, fn_videoid, outdir="sub", wait_sec=0.0, fn_checkpoint=None):
   fn_sub = Path(outdir) / lang / f"{Path(fn_videoid).stem}.csv"
   fn_sub.parent.mkdir(parents=True, exist_ok=True)
 
@@ -45,7 +46,7 @@ def retrieve_subtitle_exists(lang, fn_videoid, outdir="sub", wait_sec=0.2, fn_ch
         shell=True, universal_newlines=True)
       auto_lang, manu_lang = get_subtitle_language(result)
       subtitle_exists = subtitle_exists.append( \
-        {"videoid": videoid, "auto": lang in auto_lang, "sub": lang in manu_lang}, 
+        {"videoid": videoid, "auto": lang in auto_lang, "sub": lang in manu_lang},
         ignore_index=True)
       n_video += 1
     except:
@@ -54,7 +55,7 @@ def retrieve_subtitle_exists(lang, fn_videoid, outdir="sub", wait_sec=0.2, fn_ch
     # write current result
     if n_video % 100 == 0:
       subtitle_exists.to_csv(fn_sub, index=None)
-    
+
     # sleep
     if wait_sec > 0.01:
       time.sleep(wait_sec)
@@ -67,5 +68,5 @@ if __name__ == "__main__":
   args = parse_args()
 
   filename = retrieve_subtitle_exists(args.lang, args.videoidlist, \
-    args.outdir, fn_checkpoint=args.checkpoint)
+    args.outdir, fn_checkpoint=args.checkpoint, wait_sec=args.wait)
   print(f"save {args.lang.upper()} subtitle info to {filename}.")

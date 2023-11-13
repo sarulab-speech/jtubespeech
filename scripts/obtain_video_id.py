@@ -14,8 +14,9 @@ def parse_args():
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
   )
   parser.add_argument("lang",     type=str, help="language code (ja, en, ...)")
-  parser.add_argument("wordlist", type=str, help="filename of word list")  
+  parser.add_argument("wordlist", type=str, help="filename of word list")
   parser.add_argument("--outdir", type=str, default="videoid", help="dirname to save video IDs")
+  parser.add_argument("--wait",   type=float, default=0.0, help="seconds to wait between words (default: 0.0)")
   return parser.parse_args(sys.argv[1:])
 
 
@@ -50,5 +51,5 @@ def obtain_video_id(lang, fn_word, outdir="videoid", wait_sec=0.2):
 if __name__ == "__main__":
   args = parse_args()
 
-  filename = obtain_video_id(args.lang, args.wordlist, args.outdir)
+  filename = obtain_video_id(args.lang, args.wordlist, args.outdir, wait_sec=args.wait)
   print(f"save {args.lang.upper()} video IDs to {filename}.")

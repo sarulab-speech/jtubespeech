@@ -3,7 +3,7 @@ import argparse
 import sys
 import subprocess
 import shutil
-import pydub
+# import pydub -- imported contitionally - not necessary for --subtitles-only
 from pathlib import Path
 from util import make_video_url, make_basename, vtt2txt, autovtt2txt
 import pandas as pd
@@ -18,7 +18,7 @@ def parse_args():
   parser.add_argument("sublist",      type=str, help="filename of list of video IDs with subtitles")
   parser.add_argument("--outdir",     type=str, default="video", help="dirname to save videos")
   parser.add_argument("--keeporg",    action='store_true', default=False, help="keep original audio file.")
-  parser.add_argument("--wait",       type=float, default=0.5, help="seconds to wait between videos (default: 0.5)")
+  parser.add_argument("--wait",       type=float, default=0.0, help="seconds to wait between videos (default: 0.0)")
   parser.add_argument("--subtitles-only", action='store_true', default=False, help="download subtitles, no audio")
   return parser.parse_args(sys.argv[1:])
 
@@ -49,10 +49,10 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False, su
       url = make_video_url(videoid)
       if subs_only:
         base = fn["txt"].parent.joinpath(fn["txt"].stem)
-        cp = subprocess.run(f"youtube-dl --sub-lang {lang} --skip-download --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
+        cp = subprocess.run(f"yt-dlp --sub-lang {lang} --extractor-args youtube:player-client=web --skip-download --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
       else:
         base = fn["wav"].parent.joinpath(fn["wav"].stem)
-        cp = subprocess.run(f"youtube-dl --sub-lang {lang} --extract-audio --audio-format wav --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
+        cp = subprocess.run(f"yt-dlp --sub-lang {lang} --extract-audio --audio-format wav --write-sub {url} -o {base}.\%\(ext\)s", shell=True,universal_newlines=True)
       if cp.returncode != 0:
         print(f"Failed to download the video: url = {url}")
         continue
@@ -94,6 +94,9 @@ def download_video(lang, fn_sub, outdir="video", wait_sec=10, keep_org=False, su
 
 if __name__ == "__main__":
   args = parse_args()
+
+  if not args.subtitles_only:
+    import pydub
 
   dirname = download_video(
     args.lang, args.sublist, args.outdir,
