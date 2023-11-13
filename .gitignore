@@ -1,9 +1,18 @@
 #scripts/*
-word/*
-sub/*
-videoid/*
-video/*
+word/
+sub/
+videoid/
+video/
 README.pdf
 __pycache__/
 *.ipynb
 multi-lang/*
+
+# macOS
+.DS_Store
+# macOS+sshfs
+._.DS_Store
+
+
+# development
+slurm-*.out
