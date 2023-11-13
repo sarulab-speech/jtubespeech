@@ -16,3 +16,5 @@ multi-lang/*
 
 # development
 slurm-*.out
+zz-*
+zz-*/
